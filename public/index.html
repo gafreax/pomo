@@ -15,10 +15,19 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img alt="Brand" src="images/favicon.png" width="20" height="20">
+                        &nbsp; &nbsp; pomo
+                    </a>
+                </div>
+            </div>
+        </nav>
         <div class="container">
             <div class="jumbotron">
-                <h1>Pomo</h1>
-                <h3>Time <h2> <span id="min">0</span>:<span id="sec">0</span></h2></h3>
+                <span id="min">00</span>:<span id="sec">00</span>
             </div>
         </div>
         <div class="container">
@@ -52,7 +61,7 @@
                 });
                 timeDiv.html(0);
             } else {
-                timeDiv.html(min);
+                timeDiv.html(min > 9 ? min : "0" + min);
             }
         }
 
