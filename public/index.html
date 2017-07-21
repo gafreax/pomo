@@ -3,14 +3,19 @@
     <head>
         <title>pomo</title>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="favicon.ico" rel="icon" />
         <meta name="description" content="Pomodoro App">
         <meta name="keywords" content="pomodoro,task,timer">
         <meta name="author" content="Gabriele Fontana <gafreax@gmail.com>">
-        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="css/output.min.css" />
         <script src="js/jquery.slim.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/output.min.js"></script>
 
     </head>
 
@@ -20,68 +25,32 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">
-                        <img alt="Brand" src="images/favicon.png" width="20" height="20">
-                        <p class="navbar-text"> pomo </p>
-                    </a>
+                            <img alt="Brand" src="images/favicon.png" width="20" height="20" />
+                        </a>
+                        <p class="navbar-text">
+                            pomo
+                        </p>
                     </div>
                 </div>
             </nav>
             <div class="container-fluid">
-                <div class="jumbotron" id="menu">
-                    <button id="btnStart">Start</button>
-                </div>
                 <div class="jumbotron" id="counter">
-                    <span id="min">00</span>:<span id="sec">00</span>
+                    <h4><span id="min">00</span>:<span id="sec">00</span></h4>
                 </div>
             </div>
             <div class="container-fluid">
-                <form class="form">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" class="form-control input-sm" id="taskName" placeholder="Insert Task Name">
+                    </div>
+                    <button type="button" class="btn btn-default btn-sm" id="addTask">
+                        Add Task <i class="glyphicon glyphicon-list"></i>
+                    </button>
                 </form>
+                <ul id="taskList" class="list-group">
+                </ul>
             </div>
     </body>
-    <script>
-        var activeCounter = false;
-
-        function addSec() {
-            var timeDiv = $("#sec");
-            var sec = timeDiv.html();
-            sec = parseInt(sec) + 1
-            if (sec == 60) {
-                addMin();
-                timeDiv.html("00");
-            } else {
-                timeDiv.html(sec > 9 ? sec : "0" + sec);
-            }
-        }
-
-        function addMin() {
-            var timeDiv = $("#min");
-            var min = timeDiv.html();
-            min = parseInt(min) + 1;
-            if (min == 1) {
-                Notification.requestPermission().then(function(result) {
-                    activeCounter = false;
-                    notify = new Notification("Pomodoro", {
-                        body: "Finished!",
-                        icon: "favicon.png"
-                    });
-                });
-                timeDiv.html(0);
-            } else {
-                timeDiv.html(min > 9 ? min : "0" + min);
-            }
-        }
-
-        function timing() {
-            var sec = addSec();
-            if (activeCounter) window.setTimeout(timing, 1000);
-        }
-        $(document).ready(function() {
-            $("#btnStart").click(function() {
-                activeCounter = true;
-                timing();
-            })
-        });
-    </script>
 
 </html>
