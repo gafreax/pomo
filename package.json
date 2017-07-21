@@ -1,0 +1,18 @@
+{
+  "name": "pomo",
+  "version": "1.0.0",
+  "description": "Pomodoro Timer with simple todo",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriele Fontana <gafreax@gmail.com>",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-favicons": "^0.8.0"
+  }
+}

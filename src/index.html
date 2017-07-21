@@ -1,0 +1,68 @@
+<html>
+
+    <head>
+        <title>pomo</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Pomodoro App">
+        <meta name="keywords" content="pomodoro,task,timer">
+        <meta name="author" content="Gabriele Fontana <gafreax@gmail.com>">
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+        <script src="js/jquery.slim.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Pomo</h1>
+                <h3>Time <h2> <span id="min">0</span>:<span id="sec">0</span></h2></h3>
+            </div>
+        </div>
+        <div class="container">
+            <form class="form">
+            </form>
+        </div>
+    </body>
+    <script>
+        function addSec() {
+            var timeDiv = $("#sec");
+            var sec = timeDiv.html();
+            sec = parseInt(sec) + 1
+            if (sec == 60) {
+                addMin();
+                timeDiv.html("00");
+            } else {
+                timeDiv.html(sec > 9 ? sec : "0" + sec);
+            }
+        }
+
+        function addMin() {
+            var timeDiv = $("#min");
+            var min = timeDiv.html();
+            min = parseInt(min) + 1;
+            if (min == 1) {
+                Notification.requestPermission().then(function(result) {
+                    notify = new Notification("Pomodoro", {
+                        body: "Finished!",
+                        icon: "favicon.png"
+                    });
+                });
+                timeDiv.html(0);
+            } else {
+                timeDiv.html(min);
+            }
+        }
+
+        function timing() {
+            var sec = addSec();
+            window.setTimeout(timing, 1000);
+        }
+        $(document).ready(function() {
+            timing();
+        });
+    </script>
+
+</html>
