@@ -15,27 +15,33 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
                         <img alt="Brand" src="images/favicon.png" width="20" height="20">
-                        &nbsp; &nbsp; pomo
+                        <p class="navbar-text"> pomo </p>
                     </a>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="jumbotron" id="menu">
+                    <button id="btnStart">Start</button>
+                </div>
+                <div class="jumbotron" id="counter">
+                    <span id="min">00</span>:<span id="sec">00</span>
                 </div>
             </div>
-        </nav>
-        <div class="container">
-            <div class="jumbotron">
-                <span id="min">00</span>:<span id="sec">00</span>
+            <div class="container-fluid">
+                <form class="form">
+                </form>
             </div>
-        </div>
-        <div class="container">
-            <form class="form">
-            </form>
-        </div>
     </body>
     <script>
+        var activeCounter = false;
+
         function addSec() {
             var timeDiv = $("#sec");
             var sec = timeDiv.html();
@@ -54,6 +60,7 @@
             min = parseInt(min) + 1;
             if (min == 1) {
                 Notification.requestPermission().then(function(result) {
+                    activeCounter = false;
                     notify = new Notification("Pomodoro", {
                         body: "Finished!",
                         icon: "favicon.png"
@@ -67,10 +74,13 @@
 
         function timing() {
             var sec = addSec();
-            window.setTimeout(timing, 1000);
+            if (activeCounter) window.setTimeout(timing, 1000);
         }
         $(document).ready(function() {
-            timing();
+            $("#btnStart").click(function() {
+                activeCounter = true;
+                timing();
+            })
         });
     </script>
 
